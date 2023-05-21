@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">myTipOff</string>
+
+
+    <string name="sbs_news">SBS 뉴스</string>
+    <string name="jtbc_news">JTBC 뉴스</string>
+    <string name="ytn_news">YTN 뉴스</string>
+    <string name="yonhap_news">연합 뉴스</string>
+
+    <!-- setting -->
+    <string name="setting_menu">메뉴</string>
+    <string name="setting_use_background_title">바탕화면 아이콘 사용</string>
+    <string name="setting_use_background_permission_guide">해당 기능을 사용하기 위해서 다른 앱 그리기 권한 필요이 필요합니다.</string>
+    <string name="setting_report_list">제보리스트</string>
+    <string name="setting_version">버전</string>
+
+    <!-- 제보 -->
+    <string name="report_media_kbs">KBS 뉴스</string>
+    <string name="report_media_mbc">MBC 뉴스</string>
+    <string name="report_media_sbs">SBS 뉴스</string>
+    <string name="report_media_jtbc">JTBC 뉴스</string>
+    <string name="report_media_ytn">YTN 뉴스</string>
+    <string name="report_media_yonhap">연힙 뉴스</string>
+    <string name="report_guide">※ 현재 많은 사건, 사고에 대해 나의 편향에 맞게 제보를 할 수 있는 제보 모아앱 입니다.</string>
+    <string name="report_attach">붙여넣기</string>
+    <string name="report_attach_limit_guide">파일 용량이 500MB를 초과하였습니다.</string>
+    <string name="report_attach_limit">· 첨부파일 제한용량 500MB</string>
+    <string name="report_name">이름</string>
+    <string name="spinner_item1">실명</string>
+    <string name="spinner_item2">가명</string>
+    <string name="report_phone">연락처</string>
+    <string name="report_content">내용</string>
+    <string name="report_term">개인정보처리를위한이용자동의사항\n1.수집하는개인정보항목: 성명, 전화번호,\n2.개인정보의수집및이용목적: 제보내용및기사취재등 목적에한하여사용\n3.개인정보의보유및이용기간: 접수는각언론사마다\n상이함(취재목적이달성됐거나제보자요청시즉각</string>
+    <string name="report_agree">위 내용에 동의합니다.</string>
+    <string name="report_cancel">취소하기</string>
+    <string name="report_report">제보하기</string>
+</resources>

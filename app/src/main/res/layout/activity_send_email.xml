@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_B9E6FF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBack"
+                android:layout_width="8dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_back"
+                android:layout_marginStart="28dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMedia"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="18dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBack"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/color_424242"
+                android:layout_marginStart="7dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivMedia"/>
+
+            <FrameLayout
+                android:id="@+id/flBackButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivMedia"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@+id/clToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="60dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clGuide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="20dp"
+                    android:background="#1260D4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/white"
+                        android:text="@string/report_guide"
+                        android:layout_marginStart="7dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clAttach"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    android:paddingVertical="27dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/clGuide"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/img_attach"
+                        android:drawablePadding="8dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/color_424242"
+                        android:text="@string/report_attach"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAttach"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/clAttach"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/report_name"
+                    android:layout_marginTop="32dp"
+                    android:paddingVertical="12dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:paddingHorizontal="10dp"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    app:layout_constraintTop_toBottomOf="@+id/rvAttach"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/spinner"/>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    app:layout_constraintTop_toTopOf="@+id/spinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinner"
+                    app:layout_constraintStart_toStartOf="@+id/spinner"
+                    app:layout_constraintEnd_toEndOf="@+id/spinner"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintHorizontal_weight="0.375"
+                    app:layout_constraintTop_toTopOf="@+id/etName"
+                    app:layout_constraintBottom_toBottomOf="@+id/etName"
+                    app:layout_constraintStart_toEndOf="@+id/etName"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/report_phone"
+                    android:inputType="number"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/etName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etContent"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/report_content"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="10dp"
+                    android:gravity="start|top"
+                    app:layout_constraintTop_toBottomOf="@+id/etPhone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clTermGuide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/etContent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTerm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:foreground="@drawable/bg_2dp_rounding_white_stroke"
+                        android:background="#DBEFFE"
+                        android:textSize="16dp"
+                        android:textColor="@color/color_424242"
+                        android:text="@string/report_term"
+                        android:paddingVertical="12dp"
+                        android:paddingStart="10dp"
+                        android:lineSpacingExtra="2dp"
+                        android:scrollbars="vertical"
+                        android:fadeScrollbars="false"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cbTerm"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_term_checkbox"
+                    android:button="@null"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clTermGuide" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTermAgree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:text="@string/report_agree"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintTop_toTopOf="@+id/cbTerm"
+                    app:layout_constraintBottom_toBottomOf="@+id/cbTerm"
+                    app:layout_constraintStart_toEndOf="@+id/cbTerm"/>
+
+                <FrameLayout
+                    android:id="@+id/flAgreeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@+id/cbTerm"
+                    app:layout_constraintBottom_toBottomOf="@+id/cbTerm"
+                    app:layout_constraintStart_toStartOf="@+id/cbTerm"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTermAgree"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_2dp_rounding_white_solid"
+                    android:textSize="16dp"
+                    android:textColor="@color/color_7C7C7C"
+                    android:text="@string/report_cancel"
+                    android:gravity="center"
+                    android:paddingVertical="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTermAgree"
+                    app:layout_constraintEnd_toStartOf="@+id/tvReport"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvReport"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_2dp_rounding_rect_ff1873fc_801873fc_enabled"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/report_report"
+                    android:gravity="center"
+                    android:enabled="false"
+                    android:paddingVertical="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTermAgree"
+                    app:layout_constraintStart_toEndOf="@+id/tvCancel"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
