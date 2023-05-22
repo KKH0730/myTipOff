@@ -114,14 +114,12 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
         setNestedScrollingEnabled();
         setSpinner();
         setTextWatcher();
+        setEditFocusBackground();
     }
 
 
     private void init() {
         db = AppDatabase.getInstance(this);
-        for (Report report : db.reportDao().getAll()) {
-            Log.e("kkh","content : " + report.getContent() + "date : " + report.getDate());
-        }
         String param = getIntent().getStringExtra(SendEmailActivity.PARAM_MEDIA);
 
         if (param.equals(SendEmailActivity.PARAM_KBS)) {
@@ -272,6 +270,32 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
             String phone = Objects.requireNonNull(binding.etPhone.getText()).toString();
 
             controlReportButton(name, content, phone, isChecked);
+        });
+    }
+
+    private void setEditFocusBackground() {
+        binding.etName.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.etName.setBackgroundResource(R.drawable.bg_2dp_rounding_white_solid);
+            } else {
+                binding.etName.setBackgroundResource(R.drawable.bg_2dp_rounding_3687ff_stroke);
+            }
+        });
+
+        binding.etPhone.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.etPhone.setBackgroundResource(R.drawable.bg_2dp_rounding_white_solid);
+            } else {
+                binding.etPhone.setBackgroundResource(R.drawable.bg_2dp_rounding_3687ff_stroke);
+            }
+        });
+
+        binding.etContent.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.etContent.setBackgroundResource(R.drawable.bg_2dp_rounding_white_solid);
+            } else {
+                binding.etContent.setBackgroundResource(R.drawable.bg_2dp_rounding_3687ff_stroke);
+            }
         });
     }
 
