@@ -35,6 +35,7 @@ import androidx.databinding.DataBindingUtil;
 import com.life.myTipOff.R;
 import com.life.myTipOff.databinding.ActivitySettingBinding;
 import com.life.myTipOff.service.NotiService;
+import com.life.myTipOff.ui.report_list.ReportListActivity;
 
 import java.util.List;
 
@@ -63,12 +64,15 @@ public class SettingActivity extends AppCompatActivity {
         init();
         setVersionInfo();
         setSwitchListener();
+
+        binding.flReportListButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, ReportListActivity.class));
+        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
 
     private void init() {
-
         if (Settings.canDrawOverlays(this)) {
             binding.flPermissionButton.setVisibility(View.GONE);
             binding.swBackground.setEnabled(true);

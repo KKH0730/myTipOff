@@ -34,4 +34,8 @@
     <string name="report_agree">위 내용에 동의합니다.</string>
     <string name="report_cancel">취소하기</string>
     <string name="report_report">제보하기</string>
+    <string name="report_save_complete">기록되었습니다.</string>
+
+    <!-- 제보 리스트 -->
+    <string name="report_list_title">리스트</string>
 </resources>

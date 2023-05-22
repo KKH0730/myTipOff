@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,19 +18,26 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.life.myTipOff.R;
 import com.life.myTipOff.databinding.ActivitySendEmailBinding;
+import com.life.myTipOff.databinding.DialogCompleteReportBinding;
+import com.life.myTipOff.db.AppDatabase;
 import com.life.myTipOff.model.AttachItem;
-import com.life.myTipOff.model.AttachListener;
+import com.life.myTipOff.model.Report;
 import com.life.myTipOff.utils.ConvertUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SendEmailActivity extends AppCompatActivity implements View.OnClickListener {
     public static String PARAM_MEDIA = "medai";
@@ -48,7 +56,13 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
     private final String EMAIL_JTBC = "jebo@jtbc.co.kr";
     private final String EMAIL_YTN = "social@ytn.co.kr";
     private final String EMAIL_YONHAP = "jebo@yna.co.kr";
+
+    private AppDatabase db;
+    private AlertDialog completeReportDialog;
     String email = "";
+
+    ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
 
     @SuppressLint("NotifyDataSetChanged")
     private ActivityResultLauncher<Intent> fileSelectLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -66,9 +80,9 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
         }
 
         for (Uri selectedUri : uris) {
-            File file = ConvertUtil.INSTANCE.convertUriToFile(this, Uri.parse(selectedUri.toString()));
+            File file = ConvertUtil.convertUriToFile(this, Uri.parse(selectedUri.toString()));
             if (file != null) {
-                Float fileSize = ConvertUtil.INSTANCE.getFileSize(file);
+                Float fileSize = ConvertUtil.getFileSize(file);
 
                 Float totalSize = fileSize;
                 for (AttachItem element : attachAdapter.getItems()) {
@@ -86,7 +100,7 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
     });
 
     private ActivityResultLauncher<Intent> emailLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-
+        showCompleteReportDialog();
     });
 
     @Override
@@ -104,6 +118,10 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
 
 
     private void init() {
+        db = AppDatabase.getInstance(this);
+        for (Report report : db.reportDao().getAll()) {
+            Log.e("kkh","content : " + report.getContent() + "date : " + report.getDate());
+        }
         String param = getIntent().getStringExtra(SendEmailActivity.PARAM_MEDIA);
 
         if (param.equals(SendEmailActivity.PARAM_KBS)) {
@@ -144,13 +162,9 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
 
     private void setAttachRecyclerView() {
         binding.rvAttach.setAdapter(new AttachAdapter());
-        ((AttachAdapter) binding.rvAttach.getAdapter()).setOnAttachListener(new AttachListener() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void removeAttachFile(int id) {
-                ((AttachAdapter) binding.rvAttach.getAdapter()).removeItem(id);
-                ((AttachAdapter) binding.rvAttach.getAdapter()).notifyDataSetChanged();
-            }
+        ((AttachAdapter) binding.rvAttach.getAdapter()).setOnAttachListener(id -> {
+            ((AttachAdapter) binding.rvAttach.getAdapter()).removeItem(id);
+            ((AttachAdapter) binding.rvAttach.getAdapter()).notifyDataSetChanged();
         });
     }
 
@@ -280,6 +294,44 @@ public class SendEmailActivity extends AppCompatActivity implements View.OnClick
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         fileSelectLauncher.launch(intent);
+    }
+    
+    private void showCompleteReportDialog() {
+        if (completeReportDialog == null) {
+            DialogCompleteReportBinding completeReportBinding = DialogCompleteReportBinding.inflate(LayoutInflater.from(getApplicationContext()));
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(SendEmailActivity.this);
+            builder.setView(completeReportBinding.getRoot());
+            completeReportDialog = builder.create();
+        }
+        completeReportDialog.show();
+
+        completeReportDialog.findViewById(R.id.tvCancel).setOnClickListener(v -> {
+            if (completeReportDialog != null && completeReportDialog.isShowing()) {
+                completeReportDialog.dismiss();
+            }
+        });
+
+        completeReportDialog.findViewById(R.id.tvSave).setOnClickListener(v -> {
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat format = new SimpleDateFormat("yyyy / MM / dd");
+            Calendar calendar = Calendar.getInstance();
+
+            executorService.execute(() -> {
+                db.reportDao().insert(new Report(
+                        "제목 입력란 부재",
+                        binding.etName.getText().toString(),
+                        binding.spinner.getSelectedItem().toString(),
+                        binding.etPhone.getText().toString(),
+                        binding.etContent.getText().toString(),
+                        format.format(calendar.getTimeInMillis())
+                ));
+
+                completeReportDialog.dismiss();
+                finish();
+            });
+            Toast.makeText(SendEmailActivity.this, getString(R.string.report_save_complete), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @SuppressLint("NonConstantResourceId")

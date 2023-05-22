@@ -25,11 +25,13 @@
         android:theme="@style/Theme.MyTipOff"
         tools:targetApi="31">
 
+        <activity
+            android:name=".ui.report_list.ReportListActivity"
+            android:exported="false" />
 
         <activity
             android:name=".ui.send_mail.SendEmailActivity"
             android:exported="false" />
-
 
         <activity
             android:name=".ui.SettingActivity"

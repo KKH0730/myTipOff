@@ -7,11 +7,30 @@ import androidx.room.PrimaryKey;
 public class Report {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
+    private String title;
     private String name;
     private String nameType; // 실명 혹은 가명
     private String phone;
     private String content;
     private String date;
+
+    public Report(String title, String name, String nameType, String phone, String content, String date) {
+        this.title = title;
+        this.name = name;
+        this.nameType = nameType;
+        this.phone = phone;
+        this.content = content;
+        this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getId() {
         return id;

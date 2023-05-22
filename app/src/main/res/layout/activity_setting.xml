@@ -79,6 +79,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <FrameLayout
+                android:id="@+id/flReportListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/color_1873FC"

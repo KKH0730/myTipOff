@@ -47,42 +47,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
 
-        init();
         setBackgroundImage();
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void init() {
-//        NotiService.overlayView = LayoutInflater.from(this).inflate(R.layout.overlay_view, null); // 추가할 뷰
-//        NotiService.overlayView.setOnTouchListener((v, event) -> {
-//            try {
-//                WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) NotiService.overlayView.getLayoutParams();
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        dx = (int) (layoutParams.x - event.getRawX());
-//                        dy = (int) (layoutParams.y - event.getRawY());
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        layoutParams.x = (int) (dx + event.getRawX());
-//                        layoutParams.y = (int) (dy + event.getRawY());
-//
-//                        getWindowManager().updateViewLayout(NotiService.overlayView, layoutParams);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        break;
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                hideOverlayView();
-//            }
-//
-//            return false;
-//        });
-//        NotiService.overlayView.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, NotiService.class);
-//            intent.setAction("start_activity");
-//            startService(intent);
-//        });
     }
 
     private void setBackgroundImage() {

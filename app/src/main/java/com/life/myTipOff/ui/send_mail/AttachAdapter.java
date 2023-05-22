@@ -1,8 +1,6 @@
 package com.life.myTipOff.ui.send_mail;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.life.myTipOff.databinding.ViewholderAttachDocumentItemBinding;
 import com.life.myTipOff.model.AttachItem;
-import com.life.myTipOff.model.AttachListener;
+import com.life.myTipOff.ui.send_mail.viewholder.AttachViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,18 +57,3 @@ public class AttachAdapter extends RecyclerView.Adapter<AttachViewHolder> {
     }
 }
 
-class AttachViewHolder extends RecyclerView.ViewHolder {
-    private ViewholderAttachDocumentItemBinding binding;
-    private AttachListener listener;
-
-    AttachViewHolder(ViewholderAttachDocumentItemBinding binding, AttachListener listener) {
-        super(binding.getRoot());
-        this.binding = binding;
-        this.listener = listener;
-    }
-
-    public void bind(AttachItem data) {
-        Log.e("kkh", "data : " + data);
-        binding.ivClose.setOnClickListener(v -> listener.removeAttachFile(getAdapterPosition()));
-    }
-}
