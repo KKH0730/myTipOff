@@ -46,7 +46,6 @@ public class SettingActivity extends AppCompatActivity {
         if (Settings.canDrawOverlays(this)) {
             binding.flPermissionButton.setVisibility(View.GONE);
             binding.swBackground.setChecked(true);
-            startForegroundService();
         } else {
             binding.flPermissionButton.setVisibility(View.VISIBLE);
             binding.swBackground.setChecked(false);
@@ -108,13 +107,8 @@ public class SettingActivity extends AppCompatActivity {
     private void reqPermission() {
         if (Settings.canDrawOverlays(this)) {
             startForegroundService();
-//            showOverlayView();
         } else {
-            Intent intent = new Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:$packageName")
-            );
-
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
             overlayActivityResult.launch(intent);
         }
     }
